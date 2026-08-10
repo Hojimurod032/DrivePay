@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #ffffff;
+            color: #222;
+        }
+
+        .success-card {
+            text-align: center;
+            padding: 50px 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .check-circle {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+
+            border: 4px solid #22c55e;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            animation: pop 0.5s ease forwards;
+        }
+
+        .check {
+            width: 30px;
+            height: 55px;
+
+            border-right: 5px solid #22c55e;
+            border-bottom: 5px solid #22c55e;
+
+            transform: rotate(45deg) scale(0);
+            animation: check 0.4s ease 0.3s forwards;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Order ID Section */
+        .order-section {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .order-label {
+            font-size: 13px;
+            color: #999;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .order-id-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .order-id {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 0.5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            padding: 8px 16px;
+            background-color: #000;
+            color: #fff;
+
+            border: none;
+            border-radius: 4px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #333;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.copied {
+            background-color: #22c55e;
+        }
+
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+        }
+
+        /* Main CTA Button */
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+
+            background: #000;
+            color: #fff;
+
+            text-decoration: none;
+            border-radius: 6px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #333;
+        }
+
+        /* Toast notification */
+        .copy-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #000;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes check {
+            0% {
+                transform: rotate(45deg) scale(0);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-card {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .order-id-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="success-card">
+
+    <div class="check-circle">
+        <div class="check"></div>
+    </div>
+
+    <h1>Payment Successful</h1>
+
+    <p>
+        Thank you for your purchase.
+        Your payment has been successfully processed.
+    </p>
+
+    <div class="order-section">
+        <div class="order-label">Order ID</div>
+
+        <div class="order-id-container">
+        <span class="order-id" id="orderId">
+            {{ order.order_id }}
+        </span>
+
+            <button class="copy-btn" onclick="copyOrderId()">
+                <span>Copy</span>
+            </button>
+        </div>
+    </div>
+
+    <a href="/" class="btn">
+        Back to Products
+    </a>
+
+</div>
+
+<div class="copy-toast" id="copyToast">✓ Order ID copied!</div>
+
+<script>
+    function copyOrderId() {
+        const orderId = document.getElementById("orderId").innerText.trim();
+
+        navigator.clipboard.writeText(orderId).then(() => {
+            const button = document.querySelector(".copy-btn");
+            const text = button.querySelector("span");
+
+            text.innerText = "Copied ✓";
+            button.classList.add("copied");
+
+            setTimeout(() => {
+                text.innerText = "Copy";
+                button.classList.remove("copied");
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>

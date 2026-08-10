@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Cancelled</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #ffffff;
+            color: #222;
+        }
+
+        .cancel-card {
+            text-align: center;
+            padding: 50px 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .x-circle {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+
+            border: 4px solid #ef4444;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            animation: pop 0.5s ease forwards;
+        }
+
+        .x {
+            position: relative;
+            width: 45px;
+            height: 45px;
+        }
+
+        .x::before,
+        .x::after {
+            content: "";
+
+            position: absolute;
+            left: 20px;
+            top: 0;
+
+            width: 5px;
+            height: 50px;
+
+            background: #ef4444;
+            border-radius: 5px;
+
+            transform: scaleY(0);
+            transform-origin: center;
+
+            animation: drawX 0.4s ease 0.3s forwards;
+        }
+
+        .x::before {
+            transform: rotate(45deg) scaleY(0);
+        }
+
+        .x::after {
+            transform: rotate(-45deg) scaleY(0);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+
+            background: #000;
+            color: #fff;
+
+            text-decoration: none;
+            border-radius: 6px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #333;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawX {
+            0% {
+                transform: rotate(45deg) scaleY(0);
+            }
+
+            100% {
+                transform: rotate(45deg) scaleY(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="cancel-card">
+
+    <div class="x-circle">
+        <div class="x"></div>
+    </div>
+
+    <h1>Payment Cancelled</h1>
+
+    <p>
+        Your payment was cancelled.
+        No payment was completed.
+    </p>
+
+    <a href="{% url 'home' %}" class="btn">
+        Back to Products
+    </a>
+
+</div>
+
+</body>
+</html>
